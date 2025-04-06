@@ -1,0 +1,32 @@
+# Ignorar archivos de entorno
+.env
+.env.local
+svgf/
+nombre_del_entorno/
+# Ignorar archivos de configuración sensible
+config.py
+secrets.py
+
+# Ignorar archivos generados por Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Ignorar carpetas de entornos virtuales
+venv/
+env/
+.venv/
+
+# Ignorar archivos de IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignorar archivos de logs y datos
+*.log
+*.sql
+*.csv
