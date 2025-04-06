@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify  # Añade jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
@@ -20,15 +20,24 @@ def create_app():
 
     # 🔹 Configuración de JWT
     app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
-    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=3)  # tiempo del token
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=3)
 
-    JWTManager(app)  # Inicializar JWT
+    JWTManager(app)
 
-    # 🔹 Configurar CORS para permitir solicitudes desde el frontend
+    # 🔹 Configurar CORS
     CORS(app, resources={r"/api/*": {"origins": os.getenv("VITE_URL_SVGF")}})
 
+    # 🔹 Ruta raíz (NUEVO)
+    @app.route("/")
+    def home():
+        return jsonify(
+            {
+                "message": "Bienvenido a la API",
+            }
+        )
+
     # 🔹 Registrar Blueprints
-    app.register_blueprint(status_bp, url_prefix="/")
+    app.register_blueprint(status_bp, url_prefix="/api")
     app.register_blueprint(consultas_bp, url_prefix="/api")
     app.register_blueprint(auth_bp, url_prefix="/api")
     app.register_blueprint(generar_sql_bp, url_prefix="/api")
