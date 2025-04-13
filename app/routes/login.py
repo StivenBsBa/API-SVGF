@@ -41,12 +41,13 @@ def login():
 
         cursor = conn.cursor()
 
-        # 🔹 Detectar si es MySQL o SQL Server
-        if db.db_type == "mysql":
+        # 🔹 Detectar si es MySQL (incluye IAVEN) o SQL Server
+        if db.db_type in ["mysql", "iaven"]:
             query = "SELECT id, email, password_hash FROM usuarios WHERE email = %s"
         else:  # SQL Server
             query = "SELECT id, email, password_hash FROM usuarios WHERE email = ?"
 
+        # ✅ Ejecutar la consulta con el parámetro
         cursor.execute(query, (email,))
         user = cursor.fetchone()
 

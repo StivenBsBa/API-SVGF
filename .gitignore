@@ -2,7 +2,6 @@
 .env
 .env.local
 svgf/
-nombre_del_entorno/
 # Ignorar archivos de configuración sensible
 config.py
 secrets.py
